@@ -17,8 +17,7 @@ function App() {
   const addNewUserHandler = (newUser,error) => {
     
     if(error) {
-
-      setErrorMessage(error)
+      toggleErrorMessageHandler(error)
       return false;
     }
 
@@ -35,9 +34,14 @@ function App() {
     setUserData(newUserList)
   }
 
+  // Toggle error message
+  const toggleErrorMessageHandler = (error) => {
+    setErrorMessage(error)
+  }
+
   return (
     <div>
-      <Modal message={errorMessage}/>
+      {errorMessage && <Modal message={errorMessage} toggleErrorMessageHandler={toggleErrorMessageHandler} />}      
       <AddUser addNewUserHandler={addNewUserHandler} />
       <Users usersList={userData} deleteUserHandler={deleteUserHandler} />
     </div>
