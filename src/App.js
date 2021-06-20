@@ -6,13 +6,22 @@ import React, { useState } from "react";
 
 // + Import components.
 import Users from "./Users/Users";
+import Modal from "./UI/Modal";
 
 function App() {
   // Initialize user data.
   const [userData, setUserData] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Add new user functionality.
-  const addNewUserHandler = (newUser) => {
+  const addNewUserHandler = (newUser,error) => {
+    
+    if(error) {
+
+      setErrorMessage(error)
+      return false;
+    }
+
     setUserData((previousState) => {
       return [...previousState, newUser];
     });
@@ -28,6 +37,7 @@ function App() {
 
   return (
     <div>
+      <Modal message={errorMessage}/>
       <AddUser addNewUserHandler={addNewUserHandler} />
       <Users usersList={userData} deleteUserHandler={deleteUserHandler} />
     </div>

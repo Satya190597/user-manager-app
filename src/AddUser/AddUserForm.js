@@ -13,6 +13,15 @@ function AddUserForm(props) {
     // Prevent default form behaviour.
     event.preventDefault();
 
+    if(userData.userName.trim().length <= 0) {
+        return  props.addNewUserHandler(null,'Please enter a user name');
+    }
+
+    
+    if(userData.userAge <= 0) {
+        return  props.addNewUserHandler(null,'Please enter a user age');
+    }
+
     // Initialize new user.
     const newUser = {
       name: userData.userName,
